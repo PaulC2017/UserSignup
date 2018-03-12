@@ -1,24 +1,65 @@
-﻿@model UserSignup.Models.User
-<br />
-<form method="post" action="Add">
-    <p>@ViewBag.PasswordError @ViewBag.UsernameError</p>
+﻿
+@model UserSignup.ViewModels.AddUserViewModel
 
-    <div class="form-element">
-        <label>UserName</label>
-        <input name="Username" value="@Model.Username" type="text" />
+<br />
+<form asp-controller="User" asp-action="Add" method="post">
+    <p>@ViewBag.PasswordError @ViewBag.UsernameError @ViewBag.UserNameContentError </p>
+
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input class="form-control" asp-for="Username" />
+        <span asp-validation-for="Username"></span>
     </div>
-    <div class="form-element">
-        <label>Email</label>
-        <input name="Email" value="@Model.Email" type="email" />
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span asp-validation-for="Email"></span>
     </div>
-    <div class="form-element">
-        <label>Password</label>
-        <input name="Password" value="@Model.Password" type="password" />
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input class="form-control" asp-for="Password" />
+        <span asp-validation-for="Password"></span>
     </div>
-    <div class="form-element">
-        <label>Verify Password</label>
-        <input name="verify" type="password" />
+    <div class="form-group">
+        <label asp-for="Verify"></label>
+        <input class="form-control" asp-for="Verify" />
+        <span asp-validation-for="Verify"></span>
+    </div>
+    <div class="form-group">
+        @*<label type="hidden" asp-for="CreateDate"></label>   No label needed since the user doesn't input these values - the app calculates and populates them *@
+        <input type="hidden" class="form-control" asp-for="CreateDate" />
+    </div>
+    <div class="form-group">
+        @*<label type="hidden"  asp-for="UserId"></label> No label needed since the user doesn't input these values - the app calculates and populates them   *@
+        <input type="hidden" class="form-control" asp-for="UserId" />
     </div>
 
     <input type="submit" value="Submit" />
 </form>
+
+@*
+
+    <form method="post" action = "Add" class="form-control">
+
+        <div class="form-element">
+            <label>Email</label>
+            <input required name="Email" value="@Model.Email" type="email" />
+        </div>
+        <div class="form-element">
+            <label>Password</label>
+            <input required name="Password" value="@Model.Password" type="password" />
+        </div>
+        <div class="form-element">
+            <label>Verify Password</label>
+            <input required name="verify" type="password" />
+        </div>
+
+        <div class="form-element">
+            <input name="UserId" value="@Model.UserId" type="hidden" />
+        </div>
+        @*<div class="form-element">
+                <input name="dateCreated" value="@Model.CreateDate" type="hidden" />
+            </div>
+<input type="submit" value="Submit" />
+</form>
+*@
