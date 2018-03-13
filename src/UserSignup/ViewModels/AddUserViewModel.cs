@@ -21,7 +21,6 @@ namespace UserSignup.ViewModels
         [Required(ErrorMessage = "A Password of at least 6 characters is Required")]
         [Display(Name = "Password")]
         [StringLength(10, MinimumLength = 6)]
-        [MaxLength(16)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

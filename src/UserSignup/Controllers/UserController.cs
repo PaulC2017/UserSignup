@@ -14,49 +14,14 @@ namespace UserSignup.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string userName )
         //public IActionResult Index(User user)
         {
             //TODO 3: update this to get all users from your UserData class
             // and return it to the view.  Update the view to display some user data.
-
-            // List<User> users = new List<User>(UserData.GetAll());
-            // List<User> users = new List<User>();
-            // users = UserData.GetAll();
-            // return View(users);
-
-            //List<User> users = new List<User>();
-            //users = UserData.GetAll();
-
-            List<User> users = UserData.GetAll();
-
+            ViewData["name"] = userName;
+            List <User> users = UserData.GetAll();
             return View(users);
-
-            /* if (users.Count == 0)
-             {
-                 user = new User();
-                 //use with the else statement
-                 List<User> newUser = new List<User>();
-                 newUser.Add(user);
-                // ViewBag.newUserName = user.Username;
-                 return View(newUser);  
-             }
-             //return View(user);  // used if the else statement is   commented out
-
-             else
-              {
-
-                 //var  users = from allUsers in UserData.GetAll()
-                 // select allUsers;
-
-                 //List<User> users = new List<User>();
-                // users = UserData.GetAll();
-
-
-                 return View(users);
-
-              }
-              */
         }
 
         // TODO 4: add a details controller and view that takes a single userid,
@@ -78,35 +43,13 @@ namespace UserSignup.Controllers
             {
 
                 User newUser = new User(addUserViewModel.Username, addUserViewModel.Email, addUserViewModel.Password);
-                /* {
-                     Username = addUserViewModel.Username,
-                     Email = addUserViewModel.Email,
-                     Password = addUserViewModel.Password
-
-                 };
-                 */
+               
                 UserData.AddUser(newUser);
-
-                // return RedirectToAction("Index", new { id = newUser.UserId} );
-                ViewData["name"] = newUser.Username;
-                return Redirect("/User");
+                
+               // return Redirect("/User");
+               return RedirectToAction("Index", "User", (new { userName = newUser.Username }));
             }
-            /*else
-            {
-                ViewBag.PasswordError = user.Password != verify ? "Your passwords must match" : "";
-                ViewBag.UsernameError = String.IsNullOrEmpty(user.Username) ? "You must enter a username" : "";
-                ViewBag.users = UserData.GetAll();
-                return View(user);
-            }
-            */
-
-            /*
-             * string test = "Aasdf345ÅÄÖåäöéÉóÓüÜïÏôÔ";
-            if (test.All(Char.IsLetterOrDigit)) { ... }
-             * 
-             * userName.All(Char.IsLetter))
-             * 
-             * */
+            
             return View(addUserViewModel);
         }
 

@@ -13,7 +13,7 @@ namespace UserSignup.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string CreateDate { get; set; }
-        //  public int CreateDate { get; set; }
+        
 
         public int UserId { get; set; }
         private static int nextId = 1;
@@ -32,10 +32,8 @@ namespace UserSignup.Models
         {
             UserId = nextId;
             nextId++;
-            //CreateDate = int.Parse(DateTime.Today.ToString("yyyyMMdd"));
-            //CreateDate = DateTime.Today.ToString("yyyyMMdd");
             CreateDate = DateTime.Today.ToString("MM/dd/yyyy");
-            //CreateDate = DateTime.Today.ToString("MMDDYYYY");
+           
 
         }
         
